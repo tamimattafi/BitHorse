@@ -1,0 +1,335 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.8864820003509521,
+        -0.6882299780845642,
+        0.8837379813194275
+      ],
+      "min": [
+        -1.0814299583435059,
+        -4.402537822723389,
+        -0.6790000200271606
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 786384,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.999950647354126,
+        0.9999880790710449,
+        0.9999949932098389
+      ],
+      "min": [
+        -0.9999749660491943,
+        -0.9998989105224609,
+        -0.9999922513961792
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9999803900718689,
+        0.9999980926513672,
+        0.999986469745636,
+        1.0
+      ],
+      "min": [
+        -0.9999855756759644,
+        -0.9999345541000366,
+        -0.9999508261680603,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.9973160028457642,
+        0.9992190003395081
+      ],
+      "min": [
+        0.0007810000097379088,
+        0.0007810000097379088
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 358368,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 324,
+      "max": [
+        0.7779380083084106,
+        -0.6890580058097839,
+        0.6312999725341797
+      ],
+      "min": [
+        -1.0018739700317383,
+        -2.438282012939453,
+        -0.6378700137138367
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1576656,
+      "componentType": 5126,
+      "count": 324,
+      "max": [
+        0.989269495010376,
+        0.9691198468208313,
+        0.9993427395820618
+      ],
+      "min": [
+        -0.9963743686676025,
+        -0.9900427460670471,
+        -0.9848718047142029
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 1048512,
+      "componentType": 5126,
+      "count": 324,
+      "max": [
+        0.9586628675460815,
+        0.938480019569397,
+        0.9929577708244324,
+        1.0
+      ],
+      "min": [
+        -0.9911395311355591,
+        -0.989435076713562,
+        -0.971549391746521,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 524256,
+      "componentType": 5126,
+      "count": 324,
+      "max": [
+        0.757411003112793,
+        0.9600939750671387
+      ],
+      "min": [
+        0.026544999331235886,
+        0.40718400478363037
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1433472,
+      "componentType": 5125,
+      "count": 906,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Cleveland Museum of Art (https://sketchfab.com/clevelandart)",
+      "license": "CC0-1.0 (http://creativecommons.org/publicdomain/zero/1.0/)",
+      "source": "https://sketchfab.com/3d-models/196488-armor-for-man-and-horse-faca2ad557f64809b598c3a646a8804f",
+      "title": "1964.88 Armor for Man and Horse"
+    },
+    "generator": "Sketchfab-12.48.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1437096,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 526848,
+      "byteOffset": 1437096,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1580544,
+      "byteOffset": 1963944,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1053696,
+      "byteOffset": 3544488,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 4598184,
+      "uri": "horse.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Armor_Mat_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Armor_Mat_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Armor_Mat_normal.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Armor_Mat",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.9759845733642578,
+        -4.837009107692019e-17,
+        0.21783952414989471,
+        0.0,
+        0.0,
+        -1.0,
+        -1.2570500196318335e-13,
+        0.0,
+        0.21783952414989471,
+        1.256996694672639e-13,
+        -0.9759845733642578,
+        0.0,
+        -0.030204247683286667,
+        -1.2215083837509157,
+        1.3553328514099119,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2,
+        3
+      ],
+      "name": "Horse Armor.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    },
+    {
+      "mesh": 1,
+      "name": "Object_3"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

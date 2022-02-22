@@ -1,0 +1,22 @@
+{
+  "name": "threex.domevents",
+  "version": "1.0.1",
+  "description": "threex.domevents ================",
+  "main": "threex.domevents.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nkostelnik/threex.domevents.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkostelnik/threex.domevents/issues"
+  },
+  "homepage": "https://github.com/nkostelnik/threex.domevents"
+}
