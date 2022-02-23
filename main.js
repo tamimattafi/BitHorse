@@ -3,34 +3,15 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-const onLoading = (xhr) => {
-	console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-}
-
-const onError = (error) => {
-	console.log( 'An error happened' );
-}
-
 const modelLoader = new GLTFLoader();
-modelLoader.load(
-	'resources/models/drome/hippodrome.gltf',
-	function (hippodrome) {
-		modelLoader.load(
-			'resources/models/horse/horse.gltf',
-			function (horse) {
-				onModelsLoaded(hippodrome, horse);
-			},
-			onLoading,
-			onError
-		);
-	},
-  	onLoading,
-	onError
-);
-
-function getRandomInt(max) {
-	return Math.floor(Math.random() * max);
-}
+const hippodromeLoader = modelLoader.loadAsync('resources/models/drome/hippodrome.gltf');
+const horseLoader = modelLoader.loadAsync('resources/models/horse/horse.gltf');
+Promise.all([hippodromeLoader, horseLoader]).then((models) => {
+	onModelsLoaded(
+		models[0],
+		models[1]
+	);
+});
 
 function onModelsLoaded(hippodrome, horse) {
 	// Fix drome position, rotation and size
@@ -52,8 +33,9 @@ function onModelsLoaded(hippodrome, horse) {
 		clonedScene.position.x += 8 * index;
 		horseScenes.push(clonedScene);
 	}
+}
 
-
+function onModelsReady(hippodrome, horseScenes) {
 	// Setup
 	const scene = new THREE.Scene();
 	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -94,7 +76,7 @@ function onModelsLoaded(hippodrome, horse) {
 	// Animation Loop
 	function animate() {
 		requestAnimationFrame(animate);
-	
+
 		for(var index = 0; index < 6; index++) {
 			const horseScene = horseScenes[index];
 			const randomFactor = getRandomInt(20, 40);
@@ -105,6 +87,10 @@ function onModelsLoaded(hippodrome, horse) {
 		controls.update();
 		renderer.render(scene, camera);
 	}
-	
+
 	animate();
+}
+
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
 }
