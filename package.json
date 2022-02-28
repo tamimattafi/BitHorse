@@ -11,10 +11,6 @@
     "vite": "^2.8.0"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "lodash.clonedeep": "^4.5.0",
-    "three": "^0.137.5",
-    "three.interaction": "^0.2.3",
-    "threex.domevents": "^1.0.1"
+    "three": "^0.137.5"
   }
 }

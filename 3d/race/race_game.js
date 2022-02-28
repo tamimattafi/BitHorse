@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+THREE.Cache.enabled = true;
 export async function createAsync() {
     const modelLoader = new GLTFLoader();
     const hippodromeLoader = modelLoader.loadAsync('resources/models/drome/hippodrome.gltf');
@@ -10,12 +10,29 @@ export async function createAsync() {
     return new RaceGame(models[0], models[1]);
 }
 
+export class RaceHorse {
+    scene;
+    baseSpeed = 0.15;
+    accelerationPercent = 1.0
+
+    constructor(horseScene) {
+        this.scene = horseScene;
+    }
+
+    getSpeed() {
+        return this.baseSpeed * this.accelerationPercent;
+    }
+
+    stepForward() {
+        this.scene.position.z += this.getSpeed();
+    }
+}
+
 export class RaceGame extends THREE.EventDispatcher {
 
     hippodrome;
     horse;
-    horseScenes = [];
-
+    raceHorses = [];
     isRacing = false;
 
     scene = new THREE.Scene();
@@ -25,11 +42,7 @@ export class RaceGame extends THREE.EventDispatcher {
     });
 
     // Use dynamic values if possible without hard-code
-    endZ = 100;
-    horseBaseSpeed = 0.15;
-    horseMinSpeedPercent = 0.5;
-    horseMaxSpeedPercent = 1.5;
-
+    endZ = 110;
     horseCount = 6;
 
     constructor(hippodrome, horse) {
@@ -51,18 +64,20 @@ export class RaceGame extends THREE.EventDispatcher {
         this.horse.scene.position.z = -this.endZ;
         this.horse.scene.position.x = -20;
 
-        this.horseScenes.push(this.horse.scene);
+        const raceHorse = new RaceHorse(this.horse.scene);
+        this.raceHorses.push(raceHorse);
         for(var index = 1; index < this.horseCount; index++) {
             const clonedScene = this.horse.scene.clone();
             clonedScene.position.x += 8 * index;
-            this.horseScenes.push(clonedScene);
+            const clonedRaceHorse = new RaceHorse(clonedScene);
+            this.raceHorses.push(clonedRaceHorse);
         }
     }
 
     resetModels() {
         for(var index = 0; index < this.horseCount; index++) {
-            const horseScene = this.horseScenes[index];
-            horseScene.position.z = -this.endZ;
+            const raceHorse = this.raceHorses[index];
+            raceHorse.scene.position.z = -this.endZ;
         }
     }
 
@@ -72,8 +87,8 @@ export class RaceGame extends THREE.EventDispatcher {
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.camera.position.set(
-            this.horse.scene.position.x - 7,
-            this.horse.scene.position.y + 3,
+            this.horse.scene.position.x - 6.5,
+            this.horse.scene.position.y + 5,
             this.horse.scene.position.z
         );
 
@@ -94,57 +109,52 @@ export class RaceGame extends THREE.EventDispatcher {
         this.scene.add(this.hippodrome.scene);
 
         for(var index = 0; index < this.horseCount; index++) {
-            const horseScene = this.horseScenes[index];
+            const horseScene = this.raceHorses[index].scene;
             horseScene.castShadow = true;
             horseScene.receiveShadow = true;
             this.scene.add(horseScene);
         }
 
         this.renderer.render(this.scene, this.camera);
-        this.dispatchEvent( { type: 'models_rendered' } );
+        this.dispatchEvent({ type: 'models_rendered' });
     }
 
     startRace() {
         this.resetModels();
-        this.dispatchEvent( { type: 'race_started' } );
         this.isRacing = true;
+        this.dispatchEvent({ type: 'race_started' });
+        this.refreshModels();
     }
 
     endRace() {
+        cancelAnimationFrame(this.refreshModels.bind(this));
         this.isRacing = false;
+        this.dispatchEvent({ type: 'race_ended' });
         this.resetModels();
-        this.dispatchEvent( { type: 'race_ended' } );
     }
 
     refreshModels() {        
         if(!this.isRacing) return;
+        this.dispatchEvent({ type: 'refresh_models'})
 
+        requestAnimationFrame(this.refreshModels.bind(this));
         var maxZ = -this.endZ;
-        var maxPosition;
         for(var index = 0; index < this.horseCount; index++) {
-            const horseScene = this.horseScenes[index];
- 
-            const randomFactor = this.getRandomFloat(this.horseMinSpeedPercent, this.horseMaxSpeedPercent);
-            horseScene.position.z += this.horseBaseSpeed * randomFactor;
+            const raceHorse = this.raceHorses[index];
+            raceHorse.stepForward();
 
-            if(horseScene.position.z >= this.endZ) {
-                this.dispatchEvent( { type: 'horse_won', message: index } );
+            if(raceHorse.scene.position.z >= this.endZ) {
+                this.dispatchEvent({ type: 'horse_won', message: index });
                 this.endRace();
                 break;
             }
 
-            if(horseScene.position.z >= maxZ) {
-                maxZ = horseScene.position.z;
-                maxPosition = horseScene.position;
+            if(raceHorse.scene.position.z >= maxZ) {
+                maxZ = raceHorse.scene.position.z;
             }
         }
 
-                   
-        this.camera.position.z = maxPosition.z;       
+        this.camera.position.z = maxZ;       
         this.renderer.render(this.scene, this.camera);
-    }
-
-    getRandomFloat(min, max) {
-        return Math.random() * (max - min) + min;
     }
 }
